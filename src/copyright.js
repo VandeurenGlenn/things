@@ -3,10 +3,22 @@ import '@vandeurenglenn/flex-elements'
 
 export default customElements.define('copyright-element', class CopyrightElement extends LitElement {
   static properties = {
+    author: { type: String },
+    year: { type: String },
+    codeLicense: { type: String },
+    contentLicense: { type: String }
   }
 
   constructor() {
     super()
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+
+    this.year = this.year || 2023
+    this.codeLicense = this.codeLicense || 'CC-BY-NC-SA-4.0'
+    this.contentLicense = this.contentLicense || 'CC-BY-4.0'
   }
 
   static styles = css`
@@ -41,10 +53,10 @@ export default customElements.define('copyright-element', class CopyrightElement
     return html`
       
     <p>
-    2023 VandeurenGlenn. Code licensed under the CC-BY-NC-SA-4.0 License.
-    Except as otherwise noted,
-    Documentation & media are licensed under CC-BY-4.0 License.
-</p>
+      &#169; ${this.year} ${this.author}. Code licensed under the ${this.codeLicense} License.
+      Except as otherwise noted,
+      Documentation & media are licensed under the ${this.contentLicense} License.
+    </p>
 
     `
   }

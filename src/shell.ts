@@ -2,10 +2,11 @@ import 'custom-svg-iconset'
 import {html, css, LitElement} from 'lit'
 import 'custom-pages'
 import {bang, debang } from './utils.js'
-import './made-with.js'
+import './made-with-love.js'
 import './copyright.js'
 
 export default customElements.define('app-shell', class AppShell extends LitElement {
+
   static properties = {
   }
 
@@ -27,7 +28,6 @@ export default customElements.define('app-shell', class AppShell extends LitElem
   }
   #onhashchange() {
     const selected = debang(location.hash)
-    console.log(selected);
     this.#select(selected)
   }
 
@@ -78,8 +78,8 @@ export default customElements.define('app-shell', class AppShell extends LitElem
       <todo-view></todo-view>
 
     </custom-pages>
-    <made-with></made-with>
-    <copyright-element></copyright-element>
+    <made-with-love></made-with-love>
+    <copyright-element author="Vandeuren Glenn"></copyright-element>
     `
   }
 });

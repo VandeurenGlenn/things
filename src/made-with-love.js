@@ -1,12 +1,8 @@
 import 'custom-svg-iconset'
 import {html, css, LitElement} from 'lit'
 import 'custom-pages'
-import {bang, debang } from './utils.js'
 
-export default customElements.define('made-with', class MadeWith extends LitElement {
-  static properties = {
-  }
-
+export default customElements.define('made-with-love', class MadeWithLove extends LitElement {
   constructor() {
     super()
   }
