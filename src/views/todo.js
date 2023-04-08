@@ -14,11 +14,13 @@ import { v4 as uuidv4 } from 'uuid';
 export default customElements.define('todo-view', class TodoView extends LitElement {
   static properties = {
     createOpened: { type: Boolean, reflect: true},
-    todos: { type: Array }
+    todos: { type: Array },
+    nothingTodo: { type: Boolean }
   }
 
   constructor() {
     super()
+    this.todos = []
   }
 
   async connectedCallback() {
@@ -27,13 +29,19 @@ export default customElements.define('todo-view', class TodoView extends LitElem
       globalThis.todoStorage = await new Storage('todos')
       await globalThis.todoStorage.init()
     }
-    const ids = await todoStorage.keys()
-    const values = await todoStorage.values()
-
-    this.todos = values.map((uint8Array, i) => ({
-      id: ids[i],
-      value: new TextDecoder().decode(uint8Array)
-    }))
+    if (await todoStorage.length() > 0) {
+      const ids = await todoStorage.keys()
+      const values = await todoStorage.values()
+  
+      this.todos = values.map((uint8Array, i) => ({
+        id: ids[i],
+        value: new TextDecoder().decode(uint8Array)
+      }))
+      this.nothingTodo = false
+    } else {
+      this.nothingTodo = true
+    }
+    
   }
 
   static styles = css`
@@ -70,6 +78,10 @@ export default customElements.define('todo-view', class TodoView extends LitElem
       --mdc-ripple-color: transaparent !important;
     }
 
+    .nothing-todo {
+      padding: 12px;
+    }
+
     @media(min-width: 720px) {
       :host {
 
@@ -89,6 +101,7 @@ export default customElements.define('todo-view', class TodoView extends LitElem
       await todoStorage.put(id, value)
 
       this.todos.push({ id, value })
+      this.nothingTodo = false
       this.requestUpdate()
     }
     
@@ -112,7 +125,26 @@ export default customElements.define('todo-view', class TodoView extends LitElem
       }
       i++
     }
+    if (this.todos.length === 0) this.nothingTodo = true
     this.requestUpdate()
+  }
+
+  get todoTemplate() {
+    return this.nothingTodo ?
+      html`<span class="nothing-todo">
+        Nothing todo.
+      </span>` :
+      html`
+      ${map(this.todos, (item, i) => html`
+      <mwc-check-list-item hasMeta left selected todoId=${item.id}>
+        ${item.value}
+        <custom-svg-icon icon="delete" slot="meta" @click="${() => this.#deleteTodo(item.id)}"></custom-svg-icon>
+      </mwc-check-list-item>
+      ${i < this.todos.length -1 ? html`<li divider padded role="seperator"></li>`: ''}
+    
+    `)}
+    
+  `
   }
 
   render(){
@@ -134,15 +166,7 @@ export default customElements.define('todo-view', class TodoView extends LitElem
 
     <span class="container">
       <mwc-list multi>
-        ${map(this.todos, (item, i) => html`
-        <mwc-check-list-item hasMeta left selected todoId=${item.id}>
-          ${item.value}
-          <custom-svg-icon icon="delete" slot="meta" @click="${() => this.#deleteTodo(item.id)}"></custom-svg-icon>
-        </mwc-check-list-item>
-        ${i < this.todos.length -1 ? html`<li divider padded role="seperator"></li>`: ''}
-        
-        `)}
-        
+      ${this.todoTemplate}
       </mwc-list>
     </span>
     
