@@ -41,7 +41,7 @@ export default customElements.define('made-with-love', class MadeWithLove extend
 
     a {
       text-decoration: none;
-      color: #0097A7;
+      color: #00bcd4;
     }
     p {
       margin: 0;
