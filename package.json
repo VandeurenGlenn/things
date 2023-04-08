@@ -21,11 +21,11 @@
   "name": "things",
   "description": "Todo & reminders",
   "version": "1.0.0",
-  "main": "rollup.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
-    "watch": "rollup -c -w"
+    "watch": "rollup -c -w",
+    "deploy": "npm run build"
   },
   "keywords": [],
   "author": "",
