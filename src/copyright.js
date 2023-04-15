@@ -1,5 +1,4 @@
 import {html, css, LitElement} from 'lit'
-import '@vandeurenglenn/flex-elements'
 
 customElements.define('copyright-element', class CopyrightElement extends LitElement {
   static properties = {

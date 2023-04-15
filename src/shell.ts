@@ -6,10 +6,6 @@ import './made-with-love.js'
 import './copyright.js'
 
 customElements.define('app-shell', class AppShell extends LitElement {
-
-  static properties = {
-  }
-
   constructor() {
     super()
 
@@ -76,8 +72,8 @@ customElements.define('app-shell', class AppShell extends LitElement {
     
     <custom-pages>
       <todo-view></todo-view>
-
     </custom-pages>
+
     <made-with-love></made-with-love>
     <copyright-element author="Vandeuren Glenn"></copyright-element>
     `

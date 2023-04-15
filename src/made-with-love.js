@@ -1,6 +1,5 @@
-import 'custom-svg-iconset'
+import 'custom-svg-icon'
 import {html, css, LitElement} from 'lit'
-import 'custom-pages'
 
 customElements.define('made-with-love', class MadeWithLove extends LitElement {
   constructor() {
