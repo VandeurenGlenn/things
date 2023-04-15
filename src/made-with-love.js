@@ -2,7 +2,7 @@ import 'custom-svg-iconset'
 import {html, css, LitElement} from 'lit'
 import 'custom-pages'
 
-export default customElements.define('made-with-love', class MadeWithLove extends LitElement {
+customElements.define('made-with-love', class MadeWithLove extends LitElement {
   constructor() {
     super()
   }

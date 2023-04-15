@@ -11,7 +11,7 @@ import 'custom-svg-icon'
 import '@vandeurenglenn/flex-elements'
 import { v4 as uuidv4 } from 'uuid';
 
-export default customElements.define('todo-view', class TodoView extends LitElement {
+customElements.define('todo-view', class TodoView extends LitElement {
   static properties = {
     createOpened: { type: Boolean, reflect: true},
     todos: { type: Array },

@@ -5,7 +5,7 @@ import {bang, debang } from './utils.js'
 import './made-with-love.js'
 import './copyright.js'
 
-export default customElements.define('app-shell', class AppShell extends LitElement {
+customElements.define('app-shell', class AppShell extends LitElement {
 
   static properties = {
   }

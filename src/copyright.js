@@ -1,7 +1,7 @@
 import {html, css, LitElement} from 'lit'
 import '@vandeurenglenn/flex-elements'
 
-export default customElements.define('copyright-element', class CopyrightElement extends LitElement {
+customElements.define('copyright-element', class CopyrightElement extends LitElement {
   static properties = {
     author: { type: String },
     year: { type: String },
